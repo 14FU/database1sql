@@ -32,13 +32,7 @@ PRIMARY KEY (item_id));
 
 ALTER TABLE items MODIFY item_quan INT(15);
 ALTER TABLE items RENAME TO item_list;
-
-#DMAL COMMANDS 
-#CREATE - INSERT INFO 
-#READ- SELECT
-#UPDATE -UPDATE 
-#DELETE - DELETE
-
+#DMAL COMMANDS CREATE - INSERT INFO  READ- SELECT UPDATE -UPDATE  DELETE - DELETE
 SELECT * FROM customers; #the * means all records from XYZ
 SELECT customer_id, cust_name FROM customers;
 
@@ -50,6 +44,43 @@ INSERT INTO customers(cust_name,phone_number,over_18,age) VALUES ("arab", "04377
 INSERT INTO customers(cust_name,phone_number,over_18,age) VALUES ("nicholas", "03377123123", true,60);
 SHOW TABLES;
 DESCRIBE customers;
+
+SELECT * FROM items;
+INSERT INTO items (item_name,item_descrip,item_price,item_quan) VALUES("pasta", "spinach and cheese",7.50,5);
+INSERT INTO items (item_name,item_descrip,item_price,item_quan) VALUES("bread", "tomato and cheese",8.50,2);
+INSERT INTO items (item_name,item_descrip,item_price,item_quan) VALUES("soup", "mushroom",7.00,1);
+INSERT INTO items (item_name,item_descrip,item_price,item_quan) VALUES("steak", "fillet",9.50,7);
+INSERT INTO items (item_name,item_descrip,item_price,item_quan) VALUES("crackers", "dry wit butter",4.50,10);
+DESCRIBE items;
+SHOW TABLES;
+
+CREATE TABLE orders(
+o_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+cust_id INT NOT NULL,
+o_date DATE,
+PRIMARY KEY(o_id),
+FOREIGN KEY (cust_id) REFERENCES customers(customer_id));
+SELECT * FROM orders;
+INSERT INTO orders (cust_id,o_date) VALUES (4,"2014/10/10");
+
+
+CREATE TABLE order_items(
+oi_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+ord_id INT NOT NULL,
+i_id INT NOT NULL,
+quantity INT,
+PRIMARY KEY(oi_id),
+FOREIGN KEY (ord_id) REFERENCES orders(o_id),
+FOREIGN KEY (i_id) REFERENCES items(item_id));
+SELECT * FROM order_items;
+INSERT INTO order_items (oi_id,ord_id,i_id,quantity) VALUES (3,3,3,3);
+
+
+
+
+
+
+
 
 
 
